@@ -5,7 +5,7 @@ const letras = ['a', 'b', 'c', 'd']
 
 const numElemento = 3
 
-const stringElemento = '1'
+const stringElemento = '$'
 
 function logArrayElements(element, index, array) {
     console.log("a[" + index + "] = " + element);
@@ -90,11 +90,14 @@ function findIndex(array, callback){
 
     for(let i = 0; i < array.length; i++){
         if(callback(array[i])){
-           return resultado = i
-        }else if(resultado === undefined){
-            return resultado = -1
+           resultado = i
         }
     }
+
+    if(resultado === undefined){
+        resultado = -1
+    }
+    return resultado
 }
 
 findIndex(numeros, biggerThan)
@@ -142,15 +145,19 @@ some(numeros, biggerThan)
 //se todos os elementos são true ou false
 
 function every(array, callback){
-    let resultado
+    let resultado = []
 
     for(let i = 0; i < array.length; i++){
         if(callback(array[i])){
-            resultado = array[i]
-            return true
-        } else if (resultado === undefined){
-            return false
+            resultado.push(array[i])
         }
+    }
+    if(resultado.length === array.length){
+        return true
+    } else if (resultado === undefined){
+        return false
+    } else {
+        return false
     }
 }
 
@@ -158,57 +165,73 @@ every(numeros, biggerThan)
 
 //INCLUDES
 
-function includes (array, element){
+function includes (array, searchElement, fromIndex){
     let resultado
 
-    for (let i = 0; i < array.length; i++){
-        if(array[i] === element){
-            return resultado = true
+    if(fromIndex === undefined){
+        fromIndex = 0
+    }else{
+        for (let i = fromIndex; i < array.length; i++){
+            if(array[i] === searchElement){
+                resultado = true
+            } else if (resultado === undefined){
+                resultado = false
+            }
         }
     }
-    if(resultado === undefined){
-        return false
-    }
+
+    return resultado
 }
 
-includes(numeros, numElemento)
+includes(numeros, numElemento, 0)
 
 //INDEXOF
 
-//function indexOf(array, numElemento, pontoInicial){
-//    
-//}
-//
-//indexOf(numeros, numElemento, ?)
+function indexOf(array, numElementoPesquisa, pontoInicial){
+    
+    let resultado
+
+    for(let i = pontoInicial; i < array.length; i++){
+        if(numElementoPesquisa === array[i]){
+           resultado = i
+        }
+    }
+    if(resultado === undefined){
+        resultado = -1
+    }
+    return resultado
+}
+
+indexOf(numeros, numElemento, 0)
 
 //CONCAT
 
 //percorrer todos os numeros/ string soltou ou em array e soma-los
 
-//function concat(array, elem1, elem2){
-//    let resultado = [array + elem1 + elem2]
-//    return resultado
+    //function concat(array, valor1, valor2){
+    //    let resultado = [...array + valor1 + valor2]
+    //    return resultado
 //
-//    //for(let i = 0; i < )
-//}
+    //    
+    //}
 //
-//concat(numeros, numElemento, letras)
+    //concat(numeros, numElemento, letras)
 
 //JOIN
 
-//function join (array, elementString){
-//    let soma = []
-//    let resultado = soma.toString()
+    //function join (array, separador){
+    //    let soma = []
+    //    
+    //    if(array === undefined){
+    //        resultado = ''
+    //    }else{
+    //        for( let i = 0; i < array.length; i++){
+    //            soma.push(array[i] + separador)
+    //        }
+    //    }   
 //
-//    if(array === undefined){
-//        return resultado = ''
-//    }else{
-//        for( let i = 0; i < array.length; i++){
-//            soma.push(array[i])
-//            soma += elementString
-//        }
-//    }   
-//    return resultado
-//}
+    //    let resultado = soma.toString()
+    //    return resultado
+    //}
 //
-//join(numeros, stringElemento)
+    //join(numeros, stringElemento)
